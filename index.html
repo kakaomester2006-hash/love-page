@@ -14,7 +14,14 @@ body {
     color: white;
     overflow-x: hidden;
 }
-.container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+}
 
 /* ----- Szív ----- */
 .heart {
@@ -59,7 +66,7 @@ button {
 button:hover { background: #ff1f3d; }
 
 /* ----- Main page ----- */
-#mainPage { background: linear-gradient(to bottom, #2c3e50, #4ca1af); color: white; height: 100vh; justify-content: flex-start; padding-top: 50px; }
+#mainPage { display: none; background: linear-gradient(to bottom, #2c3e50, #4ca1af); color: white; height: 100vh; justify-content: flex-start; padding-top: 50px; }
 #timePassed { font-size: 32px; margin: 20px 0; }
 #quote { font-size: 20px; font-style: italic; margin-bottom: 30px; max-width: 600px; }
 #gallery { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
@@ -83,6 +90,7 @@ button:hover { background: #ff1f3d; }
 </head>
 <body>
 
+<!-- ----- Login oldal ----- -->
 <div id="login" class="container">
     <div class="heart"></div>
     <h2>Add meg a jelszót</h2>
@@ -90,6 +98,7 @@ button:hover { background: #ff1f3d; }
     <button onclick="checkPassword()">Belépés</button>
 </div>
 
+<!-- ----- Fő oldal ----- -->
 <div id="mainPage" class="container">
     <div class="heart" style="transform: scale(1.8) rotate(-45deg);"></div>
     <h1 id="timePassed"></h1>
@@ -99,25 +108,20 @@ button:hover { background: #ff1f3d; }
 </div>
 
 <script>
-// ----- Jelszó hash ellenőrzés (SHA-256) -----
-const correctHash = '80046fffb45fe01b2ab179283298a60475cb98ac2dd5bb02b7f7c16c69f7c49b'; // 'szerelmem' SHA-256
-async function checkPassword() {
-    const pw = document.getElementById('pw').value;
-    const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    if(hashHex === correctHash) {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('mainPage').style.display = 'flex';
+// ----- Egyszerű jelszó ellenőrzés titkosítás nélkül -----
+function checkPassword() {
+    const password = document.getElementById("pw").value.trim();
+    const correctPassword = "szeretlek"; // jelszó itt
+    if (password === correctPassword) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("mainPage").style.display = "flex";
         startTimer();
         loadQuote();
         loadGallery();
     } else {
-        alert('Hibás jelszó!');
+        alert("Hibás jelszó!");
     }
 }
-
-document.getElementById('login').style.display = 'flex';
 
 // ----- Idő számítása -----
 function startTimer() {
@@ -151,8 +155,7 @@ function loadQuote() {
     document.getElementById('quote').textContent = q;
 }
 
-// ----- Google Drive galéria (nyilvános mappa) -----
-const driveFolderLink = 'https://drive.google.com/drive/folders/1EIHv7Wkp62uvA9kIKzY1eOQh9ZL4GHYw?usp=sharing'; // ide tedd a nyilvános mappa linkjét
+// ----- Galéria -----
 function loadGallery() {
     const gallery = document.getElementById('gallery');
     for(let i=1; i<=5; i++) {
@@ -162,7 +165,7 @@ function loadGallery() {
     }
 }
 
-// ----- Kép feltöltés (Google Drive API szükséges) -----
+// ----- Feltöltés gomb -----
 function uploadImage() {
     alert('A feltöltéshez Google Drive API kulcs szükséges.');
 }
