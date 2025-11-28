@@ -100,7 +100,7 @@ button:hover { background: #ff1f3d; }
 
 <script>
 // ----- Jelszó hash ellenőrzés (SHA-256) -----
-const correctHash = 'f77c0d290f1e91266d69a5ec6e40a1eae46a33c83f91d36e74c107b204eb00d8'; // 'szerelmem' SHA-256
+const correctHash = '80046fffb45fe01b2ab179283298a60475cb98ac2dd5bb02b7f7c16c69f7c49b'; // 'szerelmem' SHA-256
 async function checkPassword() {
     const pw = document.getElementById('pw').value;
     const hashBuffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
