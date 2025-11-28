@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Szerelmes oldal</title>
 <style>
-/* ----- Alap stílusok ----- */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,7 +22,6 @@ body {
     padding: 20px;
 }
 
-/* ----- Szív ----- */
 .heart {
     width: 200px;
     height: 180px;
@@ -48,7 +46,6 @@ body {
     50% { transform: scale(1.1) rotate(-45deg); }
 }
 
-/* ----- Login stílus ----- */
 input, button {
     padding: 12px;
     font-size: 16px;
@@ -65,26 +62,16 @@ button {
 }
 button:hover { background: #ff1f3d; }
 
-/* ----- Main page ----- */
 #mainPage { display: none; background: linear-gradient(to bottom, #2c3e50, #4ca1af); color: white; height: 100vh; justify-content: flex-start; padding-top: 50px; }
 #timePassed { font-size: 32px; margin: 20px 0; }
 #quote { font-size: 20px; font-style: italic; margin-bottom: 30px; max-width: 600px; }
-#gallery { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
-#gallery img { width: 120px; height: 120px; object-fit: cover; margin: 10px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: transform 0.3s; }
-#gallery img:hover { transform: scale(1.1); }
 
-/* ----- Feltöltés gomb ----- */
-#mainPage button { background: #ff6f61; }
-#mainPage button:hover { background: #ff3b30; }
-
-/* ----- Reszponzív ----- */
 @media (max-width: 600px) {
     .heart { width: 150px; height: 135px; }
     .heart:before, .heart:after { width: 150px; height: 150px; }
     input { width: 150px; }
     #timePassed { font-size: 24px; }
     #quote { font-size: 16px; }
-    #gallery img { width: 80px; height: 80px; }
 }
 </style>
 </head>
@@ -103,21 +90,18 @@ button:hover { background: #ff1f3d; }
     <div class="heart" style="transform: scale(1.8) rotate(-45deg);"></div>
     <h1 id="timePassed"></h1>
     <h2 id="quote"></h2>
-    <div id="gallery"></div>
-    <button onclick="uploadImage()">Kép feltöltése</button>
 </div>
 
 <script>
 // ----- Egyszerű jelszó ellenőrzés titkosítás nélkül -----
 function checkPassword() {
     const password = document.getElementById("pw").value.trim();
-    const correctPassword = "szeretlek"; // jelszó itt
+    const correctPassword = "szeretlek";
     if (password === correctPassword) {
         document.getElementById("login").style.display = "none";
         document.getElementById("mainPage").style.display = "flex";
         startTimer();
         loadQuote();
-        loadGallery();
     } else {
         alert("Hibás jelszó!");
     }
@@ -154,7 +138,6 @@ function loadQuote() {
     const q = quotes[Math.floor(Math.random()*quotes.length)];
     document.getElementById('quote').textContent = q;
 }
-
 </script>
 
 </body>
